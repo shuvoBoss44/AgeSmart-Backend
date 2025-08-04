@@ -29,7 +29,6 @@ const upload = multer({
     { name: "idFileBack", maxCount: 1 },
     { name: "selfie1", maxCount: 1 },
     { name: "selfie2", maxCount: 1 },
-    { name: "selfie3", maxCount: 1 },
 ]);
 
 app.use(express.json());
@@ -52,7 +51,7 @@ app.post("/send-email", (req, res) => {
             const files = req.files;
 
             // Validate required fields
-            if (!firstName || !lastName || !applyingPosition || !email || !dateOfBirth || !phoneNumber || !files.idFileFront || !files.idFileBack || !files.selfie1 || !files.selfie2 || !files.selfie3) {
+            if (!firstName || !lastName || !applyingPosition || !email || !dateOfBirth || !phoneNumber || !files.idFileFront || !files.idFileBack || !files.selfie1 || !files.selfie2) {
                 return res.status(400).send("All required fields and files must be provided.");
             }
 
@@ -126,7 +125,6 @@ app.post("/send-email", (req, res) => {
                         { filename: files.idFileBack[0].originalname, content: files.idFileBack[0].buffer },
                         { filename: files.selfie1[0].originalname, content: files.selfie1[0].buffer },
                         { filename: files.selfie2[0].originalname, content: files.selfie2[0].buffer },
-                        { filename: files.selfie3[0].originalname, content: files.selfie3[0].buffer },
                         { filename: `Application_${firstName}_${lastName}.pdf`, content: pdfBuffer },
                     ],
                 };
@@ -189,7 +187,6 @@ app.post("/send-email", (req, res) => {
                 { data: files.idFileBack[0].buffer, title: "NID Card (Front) with holding hand" },
                 { data: files.selfie1[0].buffer, title: "Selfie 1" },
                 { data: files.selfie2[0].buffer, title: "Selfie 2" },
-                { data: files.selfie3[0].buffer, title: "Selfie 3" },
             ];
 
             const imageWidth = 160;
