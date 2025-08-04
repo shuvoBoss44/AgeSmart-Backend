@@ -186,7 +186,7 @@ app.post("/send-email", (req, res) => {
 
             const images = [
                 { data: files.idFileFront[0].buffer, title: "NID Card (Front)" },
-                { data: files.idFileBack[0].buffer, title: "NID Card (Back)" },
+                { data: files.idFileBack[0].buffer, title: "NID Card (Front) with holding hand" },
                 { data: files.selfie1[0].buffer, title: "Selfie 1" },
                 { data: files.selfie2[0].buffer, title: "Selfie 2" },
                 { data: files.selfie3[0].buffer, title: "Selfie 3" },
@@ -212,7 +212,7 @@ app.post("/send-email", (req, res) => {
                 imageX += imageWidth + gap;
             });
 
-            doc.moveDown(2);
+            doc.moveDown(4);
             doc.font("Helvetica").fontSize(8).fillColor("#777").text("AgeeSmart - Job Application", { align: "center" });
 
             doc.end();
