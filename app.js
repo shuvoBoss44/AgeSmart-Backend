@@ -34,7 +34,7 @@ const upload = multer({
 
 app.use(express.json());
 app.use(cors({
-    origin: process.env.FrontendUrl || "http://localhost:5173",
+    origin: process.env.FrontendUrl || "https://age-smart.netlify.app",
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true,
 }));
