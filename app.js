@@ -39,6 +39,9 @@ app.use(cors({
 }));
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/ping", (req, res) => {
+    res.json("pong");
+})
 app.post("/send-email", (req, res) => {
     upload(req, res, async (err) => {
         if (err) {
