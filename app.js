@@ -9,6 +9,21 @@ const { Buffer } = require("buffer");
 
 const app = express();
 
+
+app.use(cors({
+    origin: process.env.FrontendUrl || "https://age-smart.vercel.app",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    credentials: true,
+}));
+
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/ping", (req, res) => {
+    res.json("pong");
+})
+
 // Configure multer for file uploads with 2MB limit
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -31,17 +46,6 @@ const upload = multer({
     { name: "selfie2", maxCount: 1 },
 ]);
 
-app.use(express.json());
-app.use(cors({
-    origin: process.env.FrontendUrl || "https://age-smart.vercel.app",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    credentials: true,
-}));
-app.use(express.urlencoded({ extended: true }));
-
-app.get("/ping", (req, res) => {
-    res.json("pong");
-})
 app.post("/send-email", (req, res) => {
     upload(req, res, async (err) => {
         if (err) {
